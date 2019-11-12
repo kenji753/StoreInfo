@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/a"
+    android:background="#353633"
     tools:context=".Info1Activity">
 
     <ImageView
         android:id="@+id/shop_img"
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:background="@drawable/gradation"
         android:orientation="vertical"
         android:scaleType="centerCrop"
         android:src="@drawable/shop1"
@@ -18,29 +19,42 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:background="@color/a"
+    <ImageView
+        android:id="@+id/gradation_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="vertical"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/backinverted"
-        tools:layout_editor_absoluteX="14dp"
-        tools:layout_editor_absoluteY="14dp"
+        android:background="@drawable/gradation"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="#00000000"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/cross" />
 
     <TextView
         android:id="@+id/shop_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="64dp"
+        android:gravity="center"
         android:orientation="horizontal"
         android:text="shop"
         android:textColor="@color/white"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toStartOf="@+id/shop_status"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/shop_img" />
 
@@ -48,52 +62,42 @@
         android:id="@+id/shop_status"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="128dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="right"
         android:text="営業時間"
         android:textColor="@color/white"
-        android:textSize="15sp"
-        app:layout_constraintStart_toStartOf="@id/shop_name"
-        app:layout_constraintTop_toBottomOf="@+id/shop_img" />
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/shop_runtime"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/shop_name" />
 
     <TextView
         android:id="@+id/shop_runtime"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="7dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="128dp"
+        android:gravity="left"
         android:orientation="horizontal"
         android:text="15:00～21:00"
         android:textColor="@color/white"
-        android:textSize="15sp"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/shop_status"/>
-
-    <TextView
-        android:id="@+id/post"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:orientation="vertical"
-        android:text="投稿"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/shop_name" />
 
     <TextView
         android:id="@+id/postCount"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
         android:orientation="vertical"
         android:text="過去24時間に13件の投稿があります"
         android:textColor="@color/white"
-        android:textSize="15sp"
-        app:layout_constraintStart_toEndOf="@+id/post"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/shop_status" />
 
     <ImageView
@@ -111,21 +115,21 @@
         android:id="@+id/view"
         android:layout_width="fill_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="128dp"
         android:background="@android:color/darker_gray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/scroll_content"/>
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/shop_img" />
 
     <ScrollView
         android:id="@+id/scroll_content"
         android:layout_width="406dp"
         android:layout_height="535dp"
-        android:layout_marginTop="19dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="#2a2a2a"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/post">
+        app:layout_constraintStart_toStartOf="@id/view"
+        app:layout_constraintTop_toBottomOf="@id/view">
 
 
         <LinearLayout
@@ -133,18 +137,40 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/categoryMood"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Mood"
-                android:textSize="24sp" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingTop="12dp">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="24dp"
+                    android:text="雰囲気"
+                    android:textColor="#DEFFFFFF"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/categoryMood"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:paddingRight="16dp"
+                    android:text="すべて見る>"
+                    android:textColor="#DEFFFFFF"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/MoodView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="18dp"
+                android:paddingLeft="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -195,12 +221,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Dessert"
-                android:textSize="24sp"/>
+                android:textSize="24sp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/FourView"
-                android:layout_width="398dp"
-                android:layout_height="563dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_marginTop="18dp">
 
             </androidx.recyclerview.widget.RecyclerView>
