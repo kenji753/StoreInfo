@@ -36,7 +36,6 @@ class Info3Activity : AppCompatActivity() {
     private val disposable = CompositeDisposable()
     private val BASEURL = "https://jsondata.okiba.me"
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.info3)
@@ -52,10 +51,27 @@ class Info3Activity : AppCompatActivity() {
         }
 
         favButton.setOnClickListener {
-            Toast.makeText(applicationContext, "お気に入り", Toast.LENGTH_SHORT).show()
+
         }
 
-        //requestItem()
+        getClient.getData()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ data ->
+                val post = data.Post[9]
+                content.text = post.text
+                like_count.text = post.likeCount.toString()
+                tagView1.text = post.tag
+                post.likeState?.let { state ->
+                    if(state) {//色変更処理ココに書く
+                        return@let favButton.setColorFilter(0)
+                    }
+                    favButton.setColorFilter(0)
+                }
+
+            }){
+                Log.e(Info1Activity::class.java.simpleName, it.toString())
+            }.addTo(disposable)
     }
 
     companion object {
@@ -67,21 +83,10 @@ class Info3Activity : AppCompatActivity() {
                 putExtra(PHOTO, photo)
             }
     }
-/*
-    fun requestItem(){
-        getClient.getData()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ data ->
-                shop_name.text = data.Post[Info3Activity.in]
-                shop_runtime.text = data.Store.businessHours
 
-            }){
-                Log.e(Info1Activity::class.java.simpleName, it.toString())
-            }.addTo(disposable)
-    }
 
-*/
+
+
     // retrofit(APIを叩くライブラリ)のインスタンス生成
     private fun createRetrofit(): Retrofit {
         val moshi = Moshi.Builder()
