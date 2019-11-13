@@ -114,22 +114,22 @@
     <View
         android:id="@+id/view"
         android:layout_width="fill_parent"
-        android:layout_height="1dp"
+        android:layout_height="2dp"
         android:layout_marginTop="128dp"
-        android:background="@android:color/darker_gray"
+        android:background="#505050"
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/shop_img" />
 
     <ScrollView
         android:id="@+id/scroll_content"
-        android:layout_width="406dp"
+        android:layout_width="0dp"
         android:layout_height="535dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="32dp"
         android:background="#2a2a2a"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/view"
-        app:layout_constraintTop_toBottomOf="@id/view">
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toBottomOf="@+id/view">
 
 
         <LinearLayout
@@ -144,11 +144,11 @@
                 android:paddingTop="12dp">
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/MoodText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:paddingLeft="24dp"
+                    android:paddingLeft="16dp"
                     android:text="雰囲気"
                     android:textColor="#DEFFFFFF"
                     android:textSize="18sp" />
@@ -159,7 +159,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="right"
                     android:paddingRight="16dp"
-                    android:text="すべて見る>"
+                    android:text="すべて見る＞"
                     android:textColor="#DEFFFFFF"
                     android:textSize="10sp"
                     android:textStyle="bold" />
@@ -169,7 +169,7 @@
                 android:id="@+id/MoodView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="18dp"
+                android:layout_marginTop="4dp"
                 android:paddingLeft="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -178,18 +178,51 @@
 
             </androidx.recyclerview.widget.RecyclerView>
 
-            <TextView
-                android:id="@+id/categoryFood"
+            <View
+                android:id="@+id/MoodBorder"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="8dp"
+                android:background="#505050"
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/MoodView" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Food"
-                android:textSize="24sp" />
+                android:orientation="horizontal"
+                android:paddingTop="12dp">
+
+                <TextView
+                    android:id="@+id/FoodText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="16dp"
+                    android:text="食べ物"
+                    android:textColor="#DEFFFFFF"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/categoryFood"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:paddingRight="16dp"
+                    android:text="すべて見る＞"
+                    android:textColor="#DEFFFFFF"
+                    android:textSize="10sp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/FoodView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="18dp"
+                android:layout_marginTop="4dp"
+                android:paddingLeft="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -197,18 +230,51 @@
 
             </androidx.recyclerview.widget.RecyclerView>
 
-            <TextView
-                android:id="@+id/categoryDrink"
+            <View
+                android:id="@+id/FoodBorder"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="8dp"
+                android:background="#505050"
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/FoodView" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Drink"
-                android:textSize="24sp" />
+                android:orientation="horizontal"
+                android:paddingTop="12dp">
+
+                <TextView
+                    android:id="@+id/DrinkText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="16dp"
+                    android:text="飲み物"
+                    android:textColor="#DEFFFFFF"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/categoryDrink"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:paddingRight="16dp"
+                    android:text="すべて見る＞"
+                    android:textColor="#DEFFFFFF"
+                    android:textSize="10sp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/DrinkView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="18dp"
+                android:layout_marginTop="4dp"
+                android:paddingLeft="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -216,20 +282,62 @@
 
             </androidx.recyclerview.widget.RecyclerView>
 
-            <TextView
-                android:id="@+id/categoryDessert"
+            <View
+                android:id="@+id/DrinkBorder"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="8dp"
+                android:background="#505050"
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/DrinkView" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Dessert"
-                android:textSize="24sp" />
+                android:orientation="horizontal"
+                android:paddingTop="12dp">
+
+                <TextView
+                    android:id="@+id/DessetText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="16dp"
+                    android:text="デザート"
+                    android:textColor="#DEFFFFFF"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/categoryDessert"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:paddingRight="16dp"
+                    android:text="すべて見る＞"
+                    android:textColor="#DEFFFFFF"
+                    android:textSize="10sp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/FourView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="18dp">
+                android:layout_marginTop="4dp"
+                android:paddingLeft="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view" >
 
             </androidx.recyclerview.widget.RecyclerView>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="48dp" />
+
         </LinearLayout>
     </ScrollView>
 

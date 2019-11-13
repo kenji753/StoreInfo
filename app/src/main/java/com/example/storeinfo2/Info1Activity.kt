@@ -103,18 +103,18 @@ class Info1Activity : AppCompatActivity(){
             adapter = InfoAdapter(DessertPhoto, this@Info1Activity, onImageClick2)
         }
         categoryMood.setOnClickListener {
-            onImageClick(MoodPhoto, "mood")
+            onImageClick(MoodPhoto, "雰囲気")
         }
         categoryFood.setOnClickListener {
-            onImageClick(FoodPhoto, "food")
+            onImageClick(FoodPhoto, "食べ物")
         }
 
         categoryDrink.setOnClickListener {
-            onImageClick(DrinkPhoto, "drink")
+            onImageClick(DrinkPhoto, "飲み物")
         }
 
         categoryDessert.setOnClickListener {
-            onImageClick(DessertPhoto, "dessert")
+            onImageClick(DessertPhoto, "デザート")
         }
 
         requestItem()

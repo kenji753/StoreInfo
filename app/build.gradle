@@ -34,9 +34,10 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
 
-    implementation 'com.github.bumptech.glide:glide:4.4.0'
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'com.google.android.material:material:1.0.0'
 
     // RxKotlin: Rx本体
     implementation "io.reactivex.rxjava2:rxkotlin:2.4.0"
