@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="120dp"
     android:layout_height="120dp"
-    android:layout_margin="8dp"
+    android:layout_margin="4dp"
     android:orientation="horizontal">
 
     <com.google.android.material.card.MaterialCardView
@@ -13,7 +13,7 @@
         android:minHeight="200dp"
         app:cardCornerRadius="4dp"
         app:strokeColor="#707070"
-        app:strokeWidth="0.5dp">
+        app:strokeWidth="1dp">
 
         <!-- Card contents. -->
         <RelativeLayout
