@@ -32,6 +32,8 @@ class Info1Activity : AppCompatActivity(){
     private val retrofit: Retrofit by lazy { createRetrofit() }
     private val getClient: Client by lazy { retrofit.create(Client::class.java) }
     private val disposable = CompositeDisposable()
+    private var posts: Array<Posts> = emptyArray()
+    private var restaurants: Array<Restaurants> = emptyArray()
 
     //private lateinit var storeadapter: Info1Adapter
 
@@ -50,8 +52,8 @@ class Info1Activity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.info1)
 
-       // setUpOld()
-       // setUpStore()
+        // setUpOld()
+        // setUpStore()
         val MoodView = findViewById<View>(R.id.MoodView) as RecyclerView
         val FoodView = findViewById<View>(R.id.FoodView) as RecyclerView
         val DrinkView = findViewById<View>(R.id.DrinkView) as RecyclerView
@@ -117,12 +119,14 @@ class Info1Activity : AppCompatActivity(){
             onImageClick(DessertPhoto, "デザート")
         }
 
-        requestItem()
+        requestRestrants()
+
+
 
 
     }
     fun  setUpStore(){
-         //findViewById(R.id.store_date)
+        //findViewById(R.id.store_date)
     }
 
     fun setUpOld(){
@@ -131,29 +135,41 @@ class Info1Activity : AppCompatActivity(){
     }
 
 
-    fun requestItem(){
-        getClient.getData()
+    fun requestRestrants(){
+        getClient.getRestrants()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ data ->
-                shop_name.text = data.Store.name
-                shop_runtime.text = data.Store.businessHours
+                restaurants = data
+                shop_name.text = restaurants[0].name
+                shop_runtime.text = restaurants[0].business_hours
+            }){
+                Log.e(Info1Activity::class.java.simpleName, it.toString())
+            }.addTo(disposable)
+
+    }
+
+    fun requestPosts(){
+        getClient.getPosts()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ data ->
+                posts = data
 
             }){
                 Log.e(Info1Activity::class.java.simpleName, it.toString())
             }.addTo(disposable)
+
     }
+
+
+
 
     companion object {
 
-        private const val BASE_URL = "https://jsondata.okiba.me"
+        const val BASE_URL = "https://pbl-app1-api.appspot.com"
     }
 
-    interface Client {
-        // APIのエンドポイントごとにメソッドを定義する
-        @GET("/v1/json/TyhBg191111143912")
-        fun getData(): Observable<Data>
-    }
 
     // retrofit(APIを叩くライブラリ)のインスタンス生成
     private fun createRetrofit(): Retrofit {

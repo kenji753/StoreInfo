@@ -32,14 +32,13 @@ import java.util.concurrent.TimeUnit
 class Info3Activity : AppCompatActivity() {
 
     private val retrofit: Retrofit by lazy { createRetrofit() }
-    private val getClient: Info1Activity.Client by lazy { retrofit.create(Info1Activity.Client::class.java) }
+    private val getClient: Client by lazy { retrofit.create(Client::class.java) }
     private val disposable = CompositeDisposable()
-    private val BASEURL = "https://jsondata.okiba.me"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.info3)
-        
+
         val photo = getDrawable(intent.getIntExtra(PHOTO, 0))
         val number = intent.getIntExtra(PHOTO, 0)
         val imageView = findViewById<ImageView>(R.id.imageView)
@@ -54,21 +53,21 @@ class Info3Activity : AppCompatActivity() {
 
         }
 
-        getClient.getData()
+        getClient.getPosts()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ data ->
-                val post = data.Post[9]
-                content.text = post.text
-                like_count.text = post.likeCount.toString()
-                tagView1.text = post.tag
-                post.likeState?.let { state ->
+                content.text = data[0].comment
+                like_count.text = data[0].good.toString()
+                //tagView1.text = post.tag
+                /*post.likeState?.let { state ->
                     if(state) {//色変更処理ココに書く
                         return@let favButton.setColorFilter(0)
                     }
                     favButton.setColorFilter(0)
                 }
 
+                 */
             }){
                 Log.e(Info1Activity::class.java.simpleName, it.toString())
             }.addTo(disposable)
@@ -102,7 +101,7 @@ class Info3Activity : AppCompatActivity() {
             .client(okHttpClient)
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .baseUrl(BASEURL)
+            .baseUrl(Info1Activity.BASE_URL)
             .build()
     }
 
