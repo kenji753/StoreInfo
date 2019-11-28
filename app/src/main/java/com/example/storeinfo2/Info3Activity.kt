@@ -27,6 +27,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import java.util.concurrent.TimeUnit
+import kotlin.reflect.jvm.internal.impl.resolve.constants.NullValue
 
 
 class Info3Activity : AppCompatActivity() {
@@ -50,7 +51,12 @@ class Info3Activity : AppCompatActivity() {
         }
 
         favButton.setOnClickListener {
-
+            getClient.postPosts(Posts("test","food",10,7,"TEST.png",2,3))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+            .subscribe{
+                Log.e(Info3Activity::class.java.simpleName, it.toString())
+            }.addTo(disposable)
         }
 
         getClient.getPosts()
@@ -69,7 +75,7 @@ class Info3Activity : AppCompatActivity() {
 
                  */
             }){
-                Log.e(Info1Activity::class.java.simpleName, it.toString())
+                Log.e(Info3Activity::class.java.simpleName, it.toString())
             }.addTo(disposable)
     }
 
