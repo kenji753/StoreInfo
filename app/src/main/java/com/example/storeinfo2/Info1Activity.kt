@@ -117,6 +117,10 @@ class Info1Activity : AppCompatActivity() {
         requestRestaurant()
 
 
+        test.setOnClickListener{
+            post()
+        }
+
     }
 
     private fun setUpStore() {
