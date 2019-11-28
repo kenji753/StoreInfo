@@ -11,6 +11,12 @@ data class Restaurants(
     //val updated_at: UpdatedAt
 )
 
+data class PoRestaurants(
+    val name: String,
+    val business_hours: String,
+    val image: String
+)
+
 
 data class Posts(
     val comment: String,

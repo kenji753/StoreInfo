@@ -136,7 +136,7 @@ class Info1Activity : AppCompatActivity(){
 
 
     fun requestRestrants(){
-        getClient.getRestrants()
+        getClient.getRestaurants()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ data ->

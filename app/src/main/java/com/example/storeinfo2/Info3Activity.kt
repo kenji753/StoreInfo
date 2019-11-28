@@ -51,12 +51,7 @@ class Info3Activity : AppCompatActivity() {
         }
 
         favButton.setOnClickListener {
-            getClient.postPosts(Posts("test","food",10,7,"TEST.png",2,3))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-            .subscribe{
-                Log.e(Info3Activity::class.java.simpleName, it.toString())
-            }.addTo(disposable)
+            getClient.postRestaurants(PoRestaurants("potato","12:00-13:00","TEST.png"))
         }
 
         getClient.getPosts()
