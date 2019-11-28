@@ -1,5 +1,7 @@
 package com.example.storeinfo2
 
+import java.io.Serializable
+
 
 data class Restaurants(
     val business_hours: String,
@@ -15,7 +17,7 @@ data class PoRestaurants(
     val name: String,
     val business_hours: String,
     val image: String
-)
+) : Serializable
 
 
 data class Posts(
