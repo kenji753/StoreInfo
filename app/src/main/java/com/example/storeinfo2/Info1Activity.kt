@@ -7,6 +7,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -28,6 +29,7 @@ class Info1Activity : AppCompatActivity() {
     private val disposable = CompositeDisposable()
     private var posts: Array<Posts> = emptyArray()
     private var restaurants: Array<Restaurants> = emptyArray()
+    private var ppp:Array<String> = emptyArray()
 
     //private lateinit var storeadapter: Info1Adapter
 
@@ -53,8 +55,10 @@ class Info1Activity : AppCompatActivity() {
         val DrinkView = findViewById<View>(R.id.DrinkView) as RecyclerView
         val DessertView = findViewById<View>(R.id.FourView) as RecyclerView
 
+        val requestID = 1
 
-        val MoodPhoto = intArrayOf(
+
+        var MoodPhoto = intArrayOf(
             R.drawable.mood11, R.drawable.mood19, R.drawable.mood12, R.drawable.mood14,
             R.drawable.mood19, R.drawable.mood14, R.drawable.mood11
         )
@@ -114,11 +118,10 @@ class Info1Activity : AppCompatActivity() {
             onImageClick(DessertPhoto, "デザート")
         }
 
-        requestRestaurant()
-
-
+        requestRestaurant(requestID)
+        requestPosts()
         test.setOnClickListener{
-            post()
+            //postRestran()
         }
 
     }
@@ -133,14 +136,14 @@ class Info1Activity : AppCompatActivity() {
     }
 
 
-    private fun requestRestaurant() {
-        getClient.getRestaurants()
+    private fun requestRestaurant(id: Int) {
+        getClient.getRestaurants(id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ data ->
-                restaurants = data
-                shop_name.text = restaurants[0].name
-                shop_runtime.text = restaurants[0].business_hours
+                shop_name.text = data.name
+                shop_runtime.text = data.business_hours
+                Glide.with(this ).load(data.image).into(gradation_overlay)
             }) {
                 Log.e(Info1Activity::class.java.simpleName, it.toString())
             }.addTo(disposable)
@@ -152,29 +155,49 @@ class Info1Activity : AppCompatActivity() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ data ->
-                posts = data
-
+                posts=data
+                ppp[0] = data[1].image
+                ppp[1] = data[2].image
             }) {
                 Log.e(Info1Activity::class.java.simpleName, it.toString())
             }.addTo(disposable)
 
     }
-
-    // retrofitでpostするサンプル
-    private fun post() {
+    private fun postRestran() {
         // postするjsonに対応するクラスをインスタンス化
-        val restaurant = PoRestaurants(
-            "name",
-            "business_hours",
-            "image"
+        val postsdata = poRestaurants(
+            "Stellar Blink",
+            "9:00-16:00",
+            "aiu.jpg"
         )
-        getClient.postRestaurants(restaurant)
+        getClient.postRestaurants(postsdata)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 Log.d(Info1Activity::class.simpleName, "post成功")
             }) {
-                Log.d(Info1Activity::class.simpleName, "post失敗")
+                Log.e(Info1Activity::class.simpleName, it.toString())
+            }.addTo(disposable)
+    }
+
+
+    // retrofitでpostするサンプル
+    private fun post() {
+        // postするjsonに対応するクラスをインスタンス化
+        val postsdata = poPosts(
+            1,
+            2,
+            "aiu.jpg",
+            "food",
+            "aaaaaaaaaaaa"
+        )
+        getClient.postPosts(postsdata)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                Log.d(Info1Activity::class.simpleName, "post成功")
+            }) {
+                Log.e(Info1Activity::class.simpleName, it.toString())
             }.addTo(disposable)
     }
 

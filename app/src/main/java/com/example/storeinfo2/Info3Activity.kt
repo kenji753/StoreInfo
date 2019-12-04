@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.provider.ContactsContract
+import android.util.Base64
 import android.util.Log
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
@@ -22,6 +23,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.info1.*
 import kotlinx.android.synthetic.main.info3.imageButton
 import okhttp3.OkHttpClient
+import okio.Utf8
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -35,24 +37,47 @@ class Info3Activity : AppCompatActivity() {
     private val retrofit: Retrofit by lazy { createRetrofit() }
     private val getClient: Client by lazy { retrofit.create(Client::class.java) }
     private val disposable = CompositeDisposable()
-
+    private var postID = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.info3)
 
-        val photo = getDrawable(intent.getIntExtra(PHOTO, 0))
+
+        //val photo = getDrawable(intent.getIntExtra(PHOTO, 0))
+        val photo = "https://storage.cloud.google.com/pbl-lookin/image/jpeg/post/mood/mood1.jpg"
+        //val photo = "https://www.pakutaso.com/shared/img/thumb/nuko-8_TP_V1.jpg"
         val number = intent.getIntExtra(PHOTO, 0)
         val imageView = findViewById<ImageView>(R.id.imageView)
-        Glide.with(this).load(photo).into(imageView)
+        //Glide.with(this).load(photo).into(imageView)
+        Glide.with(this ).load(photo).override(400,400).centerCrop().into(imageView)
+            /*
+        intent.getStringExtra(PHOTO).let {
+            when(it){
+                "mood" -> {
+                    postID = 1
+                }
+                "food" ->{
+                    postID = 3
+                }
+                "drink" -> {
+                    postID = 4
+                }
+                else -> {
+                    postID = 6
+                }
+            }
 
-
+        }
+*/
         imageButton.setOnClickListener {
             finish()
         }
 
         favButton.setOnClickListener {
-            getClient.postRestaurants(PoRestaurants("potato","12:00-13:00","TEST.png"))
+           // getClient.postRestaurants(poRestaurants("potato","12:00-13:00","TEST.png"))
         }
+
+
 
         getClient.getPosts()
             .subscribeOn(Schedulers.io())
@@ -71,6 +96,7 @@ class Info3Activity : AppCompatActivity() {
                  */
             }){
                 Log.e(Info3Activity::class.java.simpleName, it.toString())
+                Log.e("ABABABABABABABABA", it.toString())
             }.addTo(disposable)
     }
 

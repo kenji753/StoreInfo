@@ -56,4 +56,7 @@ dependencies {
     // glide: 画像表示ライブラリ
     implementation 'com.github.bumptech.glide:glide:4.10.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
+
+    implementation 'com.google.firebase:firebase-storage:19.1.0'
+
 }
